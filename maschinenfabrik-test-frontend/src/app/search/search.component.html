@@ -1,0 +1,27 @@
+<div>
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        Please, enter a key:
+        <div>
+            <input type="text" formControlName="key" required>
+            <span class="error" *ngIf="key.invalid && (key.dirty || key.touched) && key.errors.required">
+                Key is required.
+            </span>
+        </div>
+        <div>
+            <button type="submit">Find</button>
+        </div>
+    </form>
+
+    <ul>
+        <li *ngFor="let result of resultList;">
+            <details>
+                <summary>{{result.value}}</summary>
+                <b>Path:</b> {{result.path.join(' > ')}}
+            </details>
+        </li>
+    </ul>
+    <div *ngIf="resultList?.length == 0 && searchForm.touched">
+        Key isn't available
+    </div>
+</div>
+

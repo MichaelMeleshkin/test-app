@@ -1,0 +1,24 @@
+version: '3'
+services:
+  node-server:
+    build:
+      context: ./maschinenfabrik-test-backend
+      dockerfile: dockerfile
+    ports:
+      - "3000:3000"
+    container_name: node-server
+    volumes:
+       - ./maschinenfabrik-test-backend:/src/app/api
+       - /src/app/api/node_modules
+  angular-ui:
+    build:
+      context: ./maschinenfabrik-test-frontend
+      dockerfile: dockerfile
+    ports:
+      - "4200:4200"
+    container_name: angular-ui
+    volumes:
+       - ./maschinenfabrik-test-frontend:/src/app/ui
+       - /src/app/ui/node_modules
+    links:
+       - node-server

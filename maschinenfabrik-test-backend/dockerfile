@@ -1,0 +1,11 @@
+FROM node:12
+
+WORKDIR /src/app/api
+
+COPY package*.json ./
+
+RUN npm install
+
+EXPOSE 3000
+
+CMD ["npm", "run", "start"]
